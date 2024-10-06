@@ -1,35 +1,68 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import './App.css';
+import { Route, Routes, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import Login from './compoents/Login/Login';
+import Register from './compoents/Register/Register';
+import './LogoLoad.css'; // Create this CSS file for the animation
 
 function App() {
-  const [count, setCount] = useState(0)
+	const [isMobileOrTablet, setIsMobileOrTablet] = useState(
+		window.innerWidth < 768
+	); // Tablet and below
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+	useEffect(() => {
+		const handleResize = () => {
+			setIsMobileOrTablet(window.innerWidth < 768); // Update state based on screen width
+		};
+
+		window.addEventListener('resize', handleResize);
+
+		// Cleanup event listener on component unmount
+		return () => window.removeEventListener('resize', handleResize);
+	}, []);
+
+	return (
+		<>
+			{!isMobileOrTablet ? (
+				//! donot touch
+				<div className='main'>
+					<h1>Sorry, this app is only available on mobile</h1>
+					<p>
+						Please visit the site on a mobile or tablet device to access the
+						content.
+					</p>
+				</div>
+			) : (
+				<Routes>
+					<Route path='/home' element={<h1>Home Page</h1>} />
+					<Route path='/' element={<LogoLoad />} />
+					<Route path='/login' element={<Login />} />
+					<Route path='/register' element={<Register />} />
+				</Routes>
+			)}
+		</>
+	);
 }
 
-export default App
+const LogoLoad = () => {
+	const navigate = useNavigate();
+
+	// Redirect after 3 seconds
+	useEffect(() => {
+		const timer = setTimeout(() => {
+			navigate('/login');
+		}, 5000); // 3 seconds
+
+		// Cleanup the timer when the component unmounts
+		return () => clearTimeout(timer);
+	}, [navigate]);
+	return (
+		<>
+			<div className='main'>
+				<h1 className='scale'>AlxConnect</h1>
+			</div>
+		</>
+	);
+};
+
+export default App;
