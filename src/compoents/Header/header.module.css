@@ -1,0 +1,37 @@
+.header {
+	background: rgba(1, 27, 79, 1);
+	color: white;
+	padding: 10px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.side {
+	display: flex;
+	align-items: center;
+	gap: 20px
+}
+
+.scale {
+	font-size: 2.5rem;
+	font-weight: bold;
+	color: white;
+	animation: scale 1s infinite;
+	/* Loop the scaling animation */
+}
+
+/* Keyframes for scaling effect */
+@keyframes scale {
+
+	0%,
+	100% {
+		transform: scale(1);
+		/* Start and end at normal size */
+	}
+
+	50% {
+		transform: scale(1.5);
+		/* Scale up to 1.5 times */
+	}
+}

@@ -1,9 +1,12 @@
-import './App.css';
+import styles from './App.module.css';
 import { Route, Routes } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Login from './compoents/Login/Login';
 import Register from './compoents/Register/Register';
 import LogoLoad from './compoents/LoadLogo/LoadLogo';
+import Home from './compoents/pages/Home/Home';
+import AddPost from './compoents/pages/addPost/addPost';
+
 function App() {
 	const [isMobileOrTablet, setIsMobileOrTablet] = useState(
 		window.innerWidth < 500
@@ -24,7 +27,7 @@ function App() {
 		<>
 			{!isMobileOrTablet ? (
 				//! donot touch
-				<div className='start'>
+				<div className={styles.start}>
 					<h1>Sorry, this app is only available on mobile</h1>
 					<h3>
 						Please visit the site on a mobiledevice to access the content.
@@ -35,7 +38,8 @@ function App() {
 					<Route path='/' element={<LogoLoad />} />
 					<Route path='/login' element={<Login />} />
 					<Route path='/register' element={<Register />} />
-					<Route path='/home' element={<h1>Home Page</h1>} />
+					<Route path='/home' element={<Home />} />
+					<Route path='add-post' element={<AddPost />} />
 				</Routes>
 			)}
 		</>

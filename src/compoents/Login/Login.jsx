@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
-import './login.css';
+import styles from './Login.module.css';
 
 const Login = () => {
 	return (
 		<>
-			<div className='container'>
+			<div className={styles.container}>
 				<header>
 					<h1>ALXConnect</h1>
 				</header>
@@ -14,13 +14,13 @@ const Login = () => {
 						<p>Login to your account</p>
 					</section>
 					<form>
-						<div className='form__group'>
+						<div className={styles.form__group}>
 							<input type='email' placeholder='Email' />
 						</div>
-						<div className='form__group'>
+						<div className={styles.form__group}>
 							<input type='password' placeholder='Password' />
 						</div>
-						<div className='ctx'>
+						<div className={styles.ctx}>
 							<button>continue</button>
 						</div>
 						<div>
@@ -28,13 +28,13 @@ const Login = () => {
 								Don&apos;t have an account ? <Link to='/register'>Sign Up</Link>
 							</p>
 						</div>
-						<div className='socials'>
-							<div className='social__text'>
+						<div className={`${styles.socials}`}>
+							<div className={styles.social__text}>
 								<span>__________</span>
 								<p>or sign in with</p>
 								<span>__________</span>
 							</div>
-							<div className='icons'>
+							<div className={styles.icon}>
 								<svg
 									width='176'
 									height='44'
@@ -75,9 +75,6 @@ const Login = () => {
 					</form>
 				</main>
 			</div>
-			<footer>
-				<p>&copy; 2024 ALXConnect</p>
-			</footer>
 		</>
 	);
 };

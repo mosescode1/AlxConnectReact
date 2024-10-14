@@ -1,10 +1,10 @@
-import './register.css';
+import styles from './register.module.css';
 import { Link } from 'react-router-dom';
 
 const Register = () => {
 	return (
 		<>
-			<div className='container'>
+			<div className={styles.container}>
 				<header>
 					<h1>ALXConnect</h1>
 				</header>
@@ -13,40 +13,37 @@ const Register = () => {
 						<h2>Create an Account</h2>
 						<p>Let&apos;s get started!</p>
 					</section>
-					<form
-						action='/alxconnect/templates/home.html'
-						method='POST'
-						id='formReg'>
-						<div className='form__group'>
+					<form action='#'>
+						<div className={styles.form__group}>
 							<input type='text' placeholder='Name' id='fullname' />
 						</div>
-						<div className='form__group'>
+						<div className={styles.form__group}>
 							<input type='text' placeholder='Username' id='Username' />
 						</div>
-						<div className='form__group'>
+						<div className={styles.form__group}>
 							<input type='email' placeholder='Email' id='email' />
 						</div>
-						<div className='form__group'>
+						<div className={styles.form__group}>
 							<input type='password' placeholder='Password' id='password' />
 						</div>
-						<div className='form__group'>
+						<div className={styles.form__group}>
 							<input type='password' placeholder='Confirm password' />
 						</div>
-						<div className='ctx'>
+						<div className={styles.ctx}>
 							<button>continue</button>
 						</div>
 						<div>
 							<p>
-								Already have an account ? <Link to='/login'>login</Link>
+								Already have an account ? <Link to='/login'> Login</Link>
 							</p>
 						</div>
-						<div className='socials'>
-							<div className='social__text'>
+						<div className={styles.socials}>
+							<div className={styles.social__text}>
 								<span>__________</span>
 								<p>or sign up with</p>
 								<span>__________</span>
 							</div>
-							<div className='icons'>
+							<div className={styles.icons}>
 								<svg
 									width='176'
 									height='44'
@@ -87,10 +84,6 @@ const Register = () => {
 					</form>
 				</main>
 			</div>
-			<footer>
-				<p>&copy; 2024 ALXConnect</p>
-				<div id='info'></div>
-			</footer>
 		</>
 	);
 };

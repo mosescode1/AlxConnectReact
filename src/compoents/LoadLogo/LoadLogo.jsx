@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './logoLoad.css';
+import styles from './logoLoad.module.css';
 const LogoLoad = () => {
 	const navigate = useNavigate();
 
@@ -15,8 +15,8 @@ const LogoLoad = () => {
 	}, [navigate]);
 	return (
 		<>
-			<div className='main'>
-				<h1 className='scale'>AlxConnect</h1>
+			<div className={styles.main}>
+				<h1 className={styles.scale}>AlxConnect</h1>
 			</div>
 		</>
 	);
