@@ -1,0 +1,35 @@
+.header {
+	padding: 10px;
+	display: flex;
+	align-items: center;
+	text-align: center;
+	gap: 120px;
+}
+
+.icon {
+	transform: scale(1.5);
+	-webkit-transform: scale(1.5);
+	-moz-transform: scale(1.5);
+	-ms-transform: scale(1.5);
+	-o-transform: scale(1.5);
+}
+
+.formBox {
+	padding: 10px;
+}
+
+.text {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+}
+
+.text h2 {
+	color: rgb(94, 91, 91);
+}
+
+.textarea {
+	margin-top: 1;
+	padding: 10px;
+	border: 2px solid red;
+}
