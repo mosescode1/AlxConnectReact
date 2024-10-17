@@ -1,36 +1,110 @@
-import styles from "./register.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import styles from "./Register.module.css";
+import { Fragment, useState } from "react";
 import Form from "../Form/Form";
-import { Fragment } from "react";
+import FlashMessage from "../FlashMessage.jsx/FlashMessage";
 
 const Register = () => {
+  const [open, setOpen] = useState(false); // State to handle Snackbar visibility
+  const [message, setMessage] = useState(""); // State to store message content
+  const [severity, setSeverity] = useState("success"); // State to define severity (error, success)
+  const navigate = useNavigate();
   const registerFields = [
-    { placeholder: "Name", name: "name", type: "text" },
+    { placeholder: "Name", name: "firstname", type: "text" },
+    { placeholder: "Lastname", name: "lastname", type: "text" },
     { placeholder: "Username", name: "username", type: "text" },
     { placeholder: "Email", name: "email", type: "email" },
     { placeholder: "Password", name: "password", type: "password" },
-    {
-      placeholder: "Confirm Password",
-      name: "confirmPassword",
-      type: "password",
-    },
+    // {
+    //   placeholder: "Confirm Password",
+    //   name: "confirmPassword",
+    //   type: "password",
+    // },
   ];
+
+  const handleRegister = async (formData) => {
+    const { firstname, lastname, username, email, password } = formData;
+    // Basic email validation using REGEX
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setMessage("Please enter a valid email address.");
+      setSeverity("error");
+      setOpen(true);
+      return;
+    }
+
+    // Check if password is provided
+    if (!password) {
+      setMessage("Password is required.");
+      setSeverity("error");
+      setOpen(true);
+      return;
+    }
+
+    // Check if username is provided
+    if (!username) {
+      setMessage("username is required.");
+      setSeverity("error");
+      setOpen(true);
+      return;
+    }
+
+    // Check if firstname and lastname is provided
+    if (!firstname || !lastname) {
+      setMessage("Both first name and last name are required.");
+      setSeverity("error");
+      setOpen(true);
+      return;
+    }
+    try {
+      const response = await fetch("http://localhost:9090/api/v1/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      if (!response.ok) {
+        throw new Error("Registration failed");
+      }
+      const data = await response.json();
+      setMessage("Account created successfully!"); // Set success message
+      setSeverity("success"); // set severity to true
+      setOpen(true); // Show flash message
+
+      // Redirect or update the UI as necessary
+      setTimeout(() => {
+        navigate("/login");
+      }, 1000);
+    } catch (error) {
+      setMessage("Registration failed. Please check your credentials.");
+      setSeverity("error");
+      setOpen(true); // Show flash message
+    }
+  };
 
   return (
     <Fragment>
+      <FlashMessage
+        open={open}
+        setOpen={setOpen}
+        message={message}
+        severity={severity}
+      />
       <div className={styles.container}>
         <header className={styles.header}>
           <h1>ALXConnect</h1>
         </header>
         <main>
           <section>
-            <h2>Create an Account</h2>
-            <p>Let&apos;s get started!</p>
+            <h2>Join ALXConnect!</h2>
+            <p>Create your account</p>
           </section>
           <Form
             formType="register"
             fields={registerFields}
-            // handleSubmit={handleRegister}
+            handleSubmit={handleRegister}
           />
           <div className={styles.got__acct}>
             <p>

@@ -3,6 +3,7 @@ import styles from "./Form.module.css";
 
 const Form = ({ formType, fields, handleSubmit }) => {
   const [formData, setFormData] = useState({});
+  // const [error, setError] = useState("");
 
   const handleChange = (e) => {
     setFormData({
@@ -11,9 +12,15 @@ const Form = ({ formType, fields, handleSubmit }) => {
     });
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    handleSubmit(formData);
+    try {
+      const data = await handleSubmit(formData);
+
+      // console.log(data); Dear Effa, Do whatever you like with the data haha! but be careful not to break things! 😂
+    } catch (error) {
+      setError("Failed to submit form. Please try again.");
+    }
   };
 
   return (
@@ -32,6 +39,7 @@ const Form = ({ formType, fields, handleSubmit }) => {
       <button type="submit">
         {formType === "register" ? "Register" : "Login"}
       </button>
+      {/* {error && <p className={styles.error}>{error}</p>} */}
     </form>
   );
 };

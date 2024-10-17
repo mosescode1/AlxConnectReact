@@ -1,15 +1,77 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./Login.module.css";
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import Form from "../Form/Form";
+import FlashMessage from "../FlashMessage.jsx/FlashMessage";
 
 const Login = () => {
+  const [open, setOpen] = useState(false); // State to handle Snackbar visibility
+  const [message, setMessage] = useState(""); // State to store message content
+  const [severity, setSeverity] = useState("success"); // State to define severity (error, success)
+  const navigate = useNavigate();
+
   const loginFields = [
     { placeholder: "Email", name: "email", type: "email" },
     { placeholder: "Password", name: "password", type: "password" },
   ];
+
+  const handleLogin = async (formData) => {
+    const { email, password } = formData;
+
+    // Basic email validation using REGEX
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setMessage("Please enter a valid email address.");
+      setSeverity("error");
+      setOpen(true);
+      return;
+    }
+
+    // Check if password is provided
+    if (!password) {
+      setMessage("Password is required.");
+      setSeverity("error");
+      setOpen(true);
+      return;
+    }
+    try {
+      const response = await fetch("http://localhost:9090/api/v1/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      if (!response.ok) {
+        throw new Error("Login failed");
+      }
+      const data = await response.json();
+      localStorage.setItem("token", data.access_token); // Storing JWT token in local storege
+      setMessage("Login successful!"); // Set success message
+      setSeverity("success"); // set severity to true
+      setOpen(true); // Show flash message
+
+      // Redirect or update UI as necessary
+      setTimeout(() => {
+        navigate("/home");
+      }, 1000);
+
+      return data;
+    } catch (error) {
+      setMessage("Login failed. Please check your credentials.");
+      setSeverity("error");
+      setOpen(true); // Show flash message
+    }
+  };
   return (
     <Fragment>
+      {/* FlashMessage Component */}
+      <FlashMessage
+        open={open}
+        setOpen={setOpen}
+        message={message}
+        severity={severity}
+      />
       <div className={styles.container}>
         <header className={styles.header}>
           <h1>ALXConnect</h1>
@@ -20,9 +82,9 @@ const Login = () => {
             <p>Login to your account</p>
           </section>
           <Form
-            formType="register"
+            formType="login"
             fields={loginFields}
-            // handleSubmit={handleRegister}
+            handleSubmit={handleLogin}
           />
           <div className={styles.got__acct}>
             <p>
