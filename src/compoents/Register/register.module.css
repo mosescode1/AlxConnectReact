@@ -87,6 +87,14 @@ form a {
   text-decoration: none;
 }
 
+.got__acct {
+  text-align: center;
+}
+
+.got__acct a {
+  text-decoration: none;
+  color: rgba(255, 193, 7, 1);
+}
 .social__text {
   text-align: center;
   margin-top: 1rem;

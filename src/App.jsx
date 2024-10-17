@@ -1,6 +1,6 @@
 import styles from "./App.module.css";
 import { Route, Routes } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Fragment } from "react";
 import Login from "./compoents/Login/Login";
 import Register from "./compoents/Register/Register";
 import LogoLoad from "./compoents/LoadLogo/LoadLogo";
@@ -25,7 +25,7 @@ function App() {
   }, []);
 
   return (
-    <>
+    <Fragment>
       {!isMobileOrTablet ? (
         //! donot touch
         <div className={styles.start}>
@@ -44,7 +44,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
         </Routes>
       )}
-    </>
+    </Fragment>
   );
 }
 export default App;

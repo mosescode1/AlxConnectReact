@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import classes from "./ProfileHeader.module.css";
-// import Icon from "./menu_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.svg";
+import menu from "../../../assets/menu.svg";
 
 function ProfileHeader() {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,7 +14,7 @@ function ProfileHeader() {
       <header className={classes.head}>
         <nav aria-label="Main Navigation">
           <img
-            src={"Icon"}
+            src={menu}
             alt="Menu icon"
             className={classes.icon}
             onClick={toggleDropdown}
@@ -28,7 +28,7 @@ function ProfileHeader() {
                   <Link to="/">Home</Link>
                 </li>
                 <li className={classes.dropdownItem}>
-                  <Link to="/logout">Logout</Link>
+                  <Link to="/logout">Login</Link>
                 </li>
               </ul>
             )}
