@@ -26,11 +26,11 @@ h1 {
   transform: translateY(30%);
 }
 
-section h2 {
+section .account {
   text-align: center;
 }
 
-section p {
+section .registerPara {
   text-align: center;
   margin-bottom: 2rem;
   font-size: 1rem;
@@ -61,7 +61,7 @@ form {
   text-align: center;
 }
 
-button {
+.registerButton {
   margin: 1rem auto;
   width: 100%;
   padding: 0.5rem;
@@ -72,12 +72,12 @@ button {
   font-weight: 700;
 }
 
-button:hover {
+.registerButton:hover {
   background: rgba(255, 193, 7, 0.8);
   cursor: pointer;
 }
 
-form p {
+form .formPara {
   text-align: center;
   margin-top: 0.2rem;
 }

@@ -10,8 +10,8 @@ const Login = () => {
         </header>
         <main>
           <section>
-            <h2>Welcome Back!</h2>
-            <p>Login to your account</p>
+            <h2 className={styles.loginhead}>Welcome Back!</h2>
+            <p className={styles.loginPara}>Login to your account</p>
           </section>
           <form>
             <div className={styles.form__group}>
@@ -21,17 +21,17 @@ const Login = () => {
               <input type="password" placeholder="Password" />
             </div>
             <div className={styles.ctx}>
-              <button>continue</button>
+              <button className={styles.loginButton}>continue</button>
             </div>
             <div>
-              <p>
+              <p className={styles.FormPara}>
                 Don&apos;t have an account ? <Link to="/register">Sign Up</Link>
               </p>
             </div>
             <div className={`${styles.socials}`}>
               <div className={styles.social__text}>
                 <span>__________</span>
-                <p>or sign in with</p>
+                <p className={styles.FormPara}>or sign in with</p>
                 <span>__________</span>
               </div>
               <div className={styles.icon}>

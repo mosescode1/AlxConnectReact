@@ -10,8 +10,8 @@ const Register = () => {
         </header>
         <main>
           <section>
-            <h2>Create an Account</h2>
-            <p>Let&apos;s get started!</p>
+            <h2 className={styles.account}>Create an Account</h2>
+            <p className={styles.registerPara}>Let&apos;s get started!</p>
           </section>
           <form action="#">
             <div className={styles.form__group}>
@@ -30,17 +30,17 @@ const Register = () => {
               <input type="password" placeholder="Confirm password" />
             </div>
             <div className={styles.ctx}>
-              <button>continue</button>
+              <button className={styles.registerButton}>continue</button>
             </div>
             <div>
-              <p>
+              <p className={styles.formPara}>
                 Already have an account ? <Link to="/login"> Login</Link>
               </p>
             </div>
             <div className={styles.socials}>
               <div className={styles.social__text}>
                 <span>__________</span>
-                <p>or sign up with</p>
+                <p className={styles.formPara}>or sign up with</p>
                 <span>__________</span>
               </div>
               <div className={styles.icons}>
