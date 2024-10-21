@@ -6,7 +6,8 @@ import Register from "./compoents/Register/Register";
 import LogoLoad from "./compoents/LoadLogo/LoadLogo";
 import Home from "./compoents/pages/Home/Home";
 import AddPost from "./compoents/pages/addPost/addPost";
-import Profile from "./compoents/pages/Profile/Profile";
+import ProfileHeader from "./compoents/pages/Profile/ProfileHeader";
+
 
 function App() {
   const [isMobileOrTablet, setIsMobileOrTablet] = useState(
@@ -41,7 +42,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/home" element={<Home />} />
           <Route path="/add-post" element={<AddPost />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile" element={<ProfileHeader />} />
         </Routes>
       )}
     </>

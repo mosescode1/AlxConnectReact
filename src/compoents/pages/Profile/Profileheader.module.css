@@ -73,18 +73,10 @@ ul .interestList {
 .update ul {
   list-style-type: none;
 }
-
-.posts {
+.userUpdate {
   display: flex;
   justify-content: center;
-  gap: 120px;
-  margin-top: 15px;
-}
-
-.following {
-  display: flex;
-  justify-content: center;
-  gap: 110px;
+  gap: 90px;
 }
 
 .reels {
@@ -96,3 +88,23 @@ ul .interestList {
   border-bottom: 2px solid black;
 }
 
+.images {
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+}
+
+.images .photo {
+  border-radius: 15px;
+}
+.image2 {
+  margin-top: 40px;
+  display: flex;
+  gap: 20px;
+}
+
+.listhead {
+  cursor: pointer;
+  padding-bottom: 5px;
+}
