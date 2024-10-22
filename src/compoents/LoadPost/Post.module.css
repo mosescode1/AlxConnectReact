@@ -1,5 +1,26 @@
 .container {
-	padding: 15px;
-	display: grid;
-	gap: 10px;
+  padding: 15px;
+  display: grid;
+  gap: 10px;
+  min-height: 100vh;
+}
+
+.card:last-child {
+  margin-bottom: 50px;
+}
+
+.card__typography {
+  text-align: start;
+  padding-bottom: 1rem;
+}
+
+.card__image {
+  width: 100%;
+  height: "auto";
+}
+
+.cardActions {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
