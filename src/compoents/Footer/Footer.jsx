@@ -21,7 +21,7 @@ const Footer = () => {
 	};
 
 	const handleProfile = () => {
-		navigate('/home');
+		navigate('/profile');
 	};
 
 	return (

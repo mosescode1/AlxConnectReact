@@ -36,8 +36,8 @@
 }
 
 .username {
-  font-size: 1.2rem;
-  font-weight: 500;
+  font-size: 1.8rem;
+  font-weight: 800;
 }
 
 .fileInput {
@@ -59,4 +59,13 @@
   width: 100%;
   padding: 10px;
   background-color: yellow;
+}
+
+.scale {
+  transform: scale(2);
+  -webkit-transform: scale(2);
+  -moz-transform: scale(2);
+  -ms-transform: scale(2);
+  -o-transform: scale(2);
+  margin-right: 20px;
 }

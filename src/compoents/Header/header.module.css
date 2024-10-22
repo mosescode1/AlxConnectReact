@@ -35,3 +35,23 @@
 		/* Scale up to 1.5 times */
 	}
 }
+
+
+
+/* profile styles */
+
+.dropdownStyle {
+	position: absolute;
+	top: 35px;
+	right: 10px;
+	border: none;
+	z-index: 1000;
+}
+
+.scaleHamburger {
+	transform: scale(1.5);
+	-webkit-transform: scale(1.5);
+	-moz-transform: scale(1.5);
+	-ms-transform: scale(1.5);
+	-o-transform: scale(1.5);
+}
