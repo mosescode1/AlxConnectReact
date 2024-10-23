@@ -1,0 +1,60 @@
+.main {
+  background: rgb(230, 230, 230);
+  height: 150px;
+  position: relative;
+}
+
+.avatar {
+  position: absolute;
+  top: 100%;
+  left: 53%;
+  transform: translate(-70%, -50%);
+  -webkit-transform: translate(-70%, -50%);
+  -moz-transform: translate(-70%, -50%);
+  -ms-transform: translate(-70%, -50%);
+  -o-transform: translate(-70%, -50%);
+}
+
+.scale {
+  transform: scale(3.2);
+  -webkit-transform: scale(3.2);
+  -moz-transform: scale(3.2);
+  -ms-transform: scale(3.2);
+  -o-transform: scale(3.2);
+}
+
+
+.userName {
+  margin-top: 80px;
+  text-align: center;
+}
+
+hr {
+  margin-top: 5px;
+}
+
+.recentPosts {
+  margin: 8px 10px;
+  padding: 5px 5px;
+  background: #011b4f;
+  color: white;
+  max-width: 130px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+
+/* .head {
+  display: flex;
+  justify-content: flex-end;
+  background: rgba(1, 27, 79, 1);
+}
+
+.dropdown {
+  list-style-type: none;
+}
+.dropdownItem {
+  font-size: 20px;
+} */

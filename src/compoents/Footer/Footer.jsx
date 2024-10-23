@@ -19,11 +19,9 @@ const Footer = () => {
   const handleAdd = () => {
     navigate("/add-post");
   };
-
   const handleProfile = () => {
     navigate("/profile");
   };
-
   return (
     <div className={styles.footer}>
       <section className={styles.icons}>

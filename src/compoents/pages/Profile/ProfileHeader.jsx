@@ -1,42 +1,47 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import classes from "./ProfileHeader.module.css";
-import menu from "../../../assets/menu.svg";
+import CircleNotificationsIcon from '@mui/icons-material/CircleNotifications';
+import Badge from '@mui/material/Badge';
+import MenuIcon from '@mui/icons-material/Menu';
+import styles from '../../Header/header.module.css';
+import { useState } from 'react';
 
-function ProfileHeader() {
-  const [isOpen, setIsOpen] = useState(false);
+const DropdownMenu = ({ onLogout }) => {
+	return (
+		<div className={styles.dropdownStyle}>
+			<button onClick={() => alert('Edit Profile Clicked')}>
+				Edit Profile
+			</button>
+			<button onClick={onLogout}>Logout</button>
+		</div>
+	);
+};
 
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
-  return (
-    <>
-      <header className={classes.head}>
-        <nav aria-label="Main Navigation">
-          <img
-            src={menu}
-            alt="Menu icon"
-            className={classes.icon}
-            onClick={toggleDropdown}
-            aria-expanded={isOpen}
-            aria-label="Toggle menu"
-          />
-          <div className={classes.menu}>
-            {isOpen && (
-              <ul className={classes.dropdown} aria-label="Dropdown menu">
-                <li className={classes.dropdownItem}>
-                  <Link to="/">Home</Link>
-                </li>
-                <li className={classes.dropdownItem}>
-                  <Link to="/logout">Login</Link>
-                </li>
-              </ul>
-            )}
-          </div>
-        </nav>
-      </header>
-    </>
-  );
-}
+const ProfileHeader = () => {
+	const [isOpen, setIsOpen] = useState(false);
+
+	const handleLogout = () => {
+		// Implement your logout logic here
+		console.log('User logged out');
+		// For example, you might clear user data or redirect
+		alert('Logged out successfully!');
+	};
+
+	return (
+		<div className={styles.header}>
+			<h2>AlxConnect</h2>
+			<div className={styles.side}>
+				{/* NOtification */}
+				<Badge badgeContent='2' color='primary'>
+					<CircleNotificationsIcon className={styles.scale} />
+				</Badge>
+				{/* Profile Image */}
+				<MenuIcon
+					className={styles.scaleHamburger}
+					onClick={() => setIsOpen((s) => !s)}
+				/>
+				{isOpen && <DropdownMenu onLogout={handleLogout} />}
+			</div>
+		</div>
+	);
+};
 
 export default ProfileHeader;
