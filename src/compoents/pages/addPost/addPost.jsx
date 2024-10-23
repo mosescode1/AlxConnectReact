@@ -24,19 +24,19 @@ const AddPost = () => {
   const userctx = useContext(UserContext);
   const { currentlyLoggedInUser } = userctx;
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    setImage(file);
+	const handleImageChange = (e) => {
+		const file = e.target.files[0];
+		setImage(file);
 
-    // Preview the selected image
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setImagePreview(reader.result);
-    };
-    if (file) {
-      reader.readAsDataURL(file);
-    }
-  };
+		// Preview the selected image
+		const reader = new FileReader();
+		reader.onloadend = () => {
+			setImagePreview(reader.result);
+		};
+		if (file) {
+			reader.readAsDataURL(file);
+		}
+	};
 
   const handleSubmit = async () => {
     // Form content validation
@@ -109,48 +109,47 @@ const AddPost = () => {
           <h2 className={styles.username}>{currentlyLoggedInUser.username}</h2>
         </div>
 
-        <TextField
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          fullWidth
-          id="post"
-          label="New Post"
-          variant="outlined"
-          multiline
-          rows={4}
-          sx={{ mt: 2 }}
-        />
+				<TextField
+					value={name}
+					onChange={(e) => setName(e.target.value)}
+					fullWidth
+					id='post'
+					label='New Post'
+					variant='outlined'
+					multiline
+					rows={4}
+					sx={{ mt: 2 }}
+				/>
 
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleImageChange}
-          className={styles.fileInput}
-        />
+				<input
+					type='file'
+					accept='image/*'
+					onChange={handleImageChange}
+					className={styles.fileInput}
+				/>
 
-        {imagePreview && (
-          <div className={styles.imagePreviewContainer}>
-            <img
-              src={imagePreview}
-              alt="Preview"
-              className={styles.imagePreview}
-            />
-          </div>
-        )}
+				{imagePreview && (
+					<div className={styles.imagePreviewContainer}>
+						<img
+							src={imagePreview}
+							alt='Preview'
+							className={styles.imagePreview}
+						/>
+					</div>
+				)}
 
-        <Button
-          variant="contained"
-          onClick={handleSubmit}
-          className={styles.submitButton}
-          sx={{ mt: 2 }}
-        >
-          Post
-        </Button>
-      </Box>
+				<Button
+					variant='contained'
+					onClick={handleSubmit}
+					className={styles.submitButton}
+					sx={{ mt: 2 }}>
+					Post
+				</Button>
+			</Box>
 
-      <Footer />
-    </Fragment>
-  );
+			<Footer />
+		</Fragment>
+	);
 };
 
 export default AddPost;
