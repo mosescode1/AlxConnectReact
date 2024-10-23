@@ -1,4 +1,6 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import UserContext from "../../store/userContext";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
@@ -7,11 +9,20 @@ import Avatar from "@mui/material/Avatar";
 import Header from "../../Header/Header";
 import Footer from "../../Footer/Footer";
 import styles from "./addPost.module.css";
+import FlashMessage from "../../FlashMessage.jsx/FlashMessage";
 
 const AddPost = () => {
   const [name, setName] = useState("");
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
+  const [open, setOpen] = useState(false); // State to handle Snackbar visibility
+  const [message, setMessage] = useState(""); // State to store message content
+  const [severity, setSeverity] = useState("success"); // State to define severity (error, success)
+  const navigate = useNavigate();
+
+  // Access the currently logged in user from context
+  const userctx = useContext(UserContext);
+  const { currentlyLoggedInUser } = userctx;
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -28,6 +39,14 @@ const AddPost = () => {
   };
 
   const handleSubmit = async () => {
+    // Form content validation
+    if (!name.trim()) {
+      setMessage("Post content cannot be empty");
+      setSeverity("error");
+      setOpen(true);
+      return;
+    }
+
     const formData = new FormData();
     formData.append("content", name);
     if (image) {
@@ -36,27 +55,46 @@ const AddPost = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:9090/api/v1/users/${id}/posts`,
+        `http://localhost:9090/api/v1/users/${currentlyLoggedInUser.id}/posts`,
         {
           method: "POST",
           body: formData,
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
         }
       );
       if (response.ok) {
-        console.log("Post created successfully!"); // update UI accordingly...
-        setName("");
+        setName(""); // Clear form fields
         setImage(null);
         setImagePreview(null);
+        setMessage("Post created successfully");
+        setSeverity("success");
+        setOpen(true);
+
+        setTimeout(() => {
+          navigate("/home");
+        }, 1000);
       } else {
-        console.error("Error creating post."); //update UI accordingly
+        setMessage("Error creating post");
+        setSeverity("error");
+        setOpen(true);
       }
     } catch (error) {
-      console.error("Error:", error); //  update UI accordingly
+      setMessage("Error creating post");
+      setSeverity("error");
+      setOpen(true);
     }
   };
 
   return (
     <Fragment>
+      <FlashMessage
+        open={open}
+        setOpen={setOpen}
+        message={message}
+        severity={severity}
+      />
       <Header />
       <div className={styles.header}>
         <ArrowBackIcon className={styles.icon} />
@@ -65,8 +103,10 @@ const AddPost = () => {
 
       <Box className={styles.formBox}>
         <div className={styles.userDetails}>
-          <Avatar className={styles.avatar}>P</Avatar>
-          <h2 className={styles.username}>Effa Triad</h2>
+          <Avatar className={styles.avatar}>
+            {currentlyLoggedInUser.username[0].toUpperCase()}
+          </Avatar>
+          <h2 className={styles.username}>{currentlyLoggedInUser.username}</h2>
         </div>
 
         <TextField
@@ -114,7 +154,3 @@ const AddPost = () => {
 };
 
 export default AddPost;
-
-// To be continued tomorrow...
-// I will continue with the implementation of the AddPost component.
-// Create a context to manage the state of the currently logged in user globally
