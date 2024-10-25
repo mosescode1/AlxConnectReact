@@ -13,7 +13,7 @@ const Footer = () => {
   };
 
   const handleSearch = () => {
-    navigate("/home");
+    navigate("/search");
   };
 
   const handleAdd = () => {

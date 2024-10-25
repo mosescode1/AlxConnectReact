@@ -1,14 +1,16 @@
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./Login.module.css";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useState, useContext } from "react";
 import Form from "../Form/Form";
 import FlashMessage from "../FlashMessage.jsx/FlashMessage";
+import UserContext from "../store/userContext";
 
 const Login = () => {
   const [open, setOpen] = useState(false); // State to handle Snackbar visibility
   const [message, setMessage] = useState(""); // State to store message content
   const [severity, setSeverity] = useState("success"); // State to define severity (error, success)
   const navigate = useNavigate();
+  const { setCurrentlyLoggedInUser } = useContext(UserContext);
 
   const loginFields = [
     { placeholder: "Email", name: "email", type: "email" },
@@ -46,7 +48,10 @@ const Login = () => {
         throw new Error("Login failed");
       }
       const data = await response.json();
-      localStorage.setItem("token", data.access_token); // Storing JWT token in local storege
+      setCurrentlyLoggedInUser(data.user); // Set user data in context
+      localStorage.setItem("user", JSON.stringify(data.user)); // Optionally store in local storage, But be carefull with sensitive data Effa... Yes you!
+      localStorage.setItem("token", data.access_token); // Storing JWT token in local storage
+
       setMessage("Login successful!"); // Set success message
       setSeverity("success"); // set severity to true
       setOpen(true); // Show flash message

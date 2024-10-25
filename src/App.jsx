@@ -1,13 +1,20 @@
 import styles from "./App.module.css";
 import { Route, Routes } from "react-router-dom";
-import { useEffect, useState, Fragment } from "react";
-import Login from "./compoents/Login/Login";
-import Register from "./compoents/Register/Register";
-import LogoLoad from "./compoents/LoadLogo/LoadLogo";
-import Home from "./compoents/pages/Home/Home";
-import AddPost from "./compoents/pages/addPost/addPost";
-import Profile from "./compoents/pages/Profile/Profile";
+import { useEffect, useState, Fragment, Suspense, lazy } from "react";
 import UserContextProvider from "./compoents/store/userContextProvider";
+import LogoLoad from "./compoents/LoadLogo/LoadLogo";
+import LoadingSpinner from "./compoents/LoadingSpinner/LoadingSpinner";
+
+// Lazy loading components for better app optimization
+const Login = lazy(() => import("./compoents/Login/Login"));
+const Register = lazy(() => import("./compoents/Register/Register"));
+const Home = lazy(() => import("./compoents/pages/Home/Home"));
+const AddPost = lazy(() => import("./compoents/pages/addPost/addPost"));
+const Profile = lazy(() => import("./compoents/pages/Profile/Profile"));
+const UserSearch = lazy(() => import("./compoents/pages/search/UserSearch"));
+const UserProfile = lazy(() =>
+  import("./compoents/pages/UserProfile/UserProfile")
+);
 
 function App() {
   const [isMobileOrTablet, setIsMobileOrTablet] = useState(
@@ -33,14 +40,18 @@ function App() {
             </h3>
           </div>
         ) : (
-          <Routes>
-            <Route path="/" element={<LogoLoad />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/add-post" element={<AddPost />} />
-            <Route path="/profile" element={<Profile />} />
-          </Routes>
+          <Suspense fallback={<div>{<LoadingSpinner />}</div>}>
+            <Routes>
+              <Route path="/" element={<LogoLoad />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/home" element={<Home />} />
+              <Route path="/add-post" element={<AddPost />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/search" element={<UserSearch />} />
+              <Route path="/users/:userId" element={<UserProfile />} />
+            </Routes>
+          </Suspense>
         )}
       </Fragment>
     </UserContextProvider>
