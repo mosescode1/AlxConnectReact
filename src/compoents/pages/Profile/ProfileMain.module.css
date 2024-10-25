@@ -1,0 +1,120 @@
+.mainPage .allPosts {
+  width: 100%;
+  margin: 15px auto;
+}
+.main {
+  background: rgb(230, 230, 230);
+  height: 150px;
+  position: relative;
+}
+
+.avatar {
+  position: absolute;
+  top: 100%;
+  left: 53%;
+  transform: translate(-70%, -50%);
+  -webkit-transform: translate(-70%, -50%);
+  -moz-transform: translate(-70%, -50%);
+  -ms-transform: translate(-70%, -50%);
+  -o-transform: translate(-70%, -50%);
+}
+
+.scale {
+  transform: scale(3.2);
+  -webkit-transform: scale(3.2);
+  -moz-transform: scale(3.2);
+  -ms-transform: scale(3.2);
+  -o-transform: scale(3.2);
+}
+
+.userName {
+  margin-top: 80px;
+  text-align: center;
+}
+
+hr {
+  margin-top: 5px;
+}
+
+.allPosts {
+  padding: 5px 5px;
+  background: #011b4f;
+  color: white;
+  max-width: 130px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  position: relative; /* Added for animation */
+  overflow: hidden;
+}
+
+.allPosts h2 {
+  margin: 0; /* Remove default margin */
+  font-size: 24px; /* Increase font size */
+  text-align: center;
+  animation: fadeIn 0.5s ease-in-out; /* Animation for the header */
+}
+
+.container {
+  padding: 15px;
+  display: grid;
+  gap: 10px;
+  min-height: 100vh;
+}
+
+.card:last-child {
+  margin-bottom: 50px;
+}
+
+.card__typography {
+  text-align: start;
+  padding-bottom: 1rem;
+}
+
+.card__image {
+  width: 100%;
+  height: "auto";
+}
+
+.cardActions {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+/* Animation for the header */
+@keyframes fadeIn {
+  from {
+    opacity: 0; /* Start invisible */
+    transform: translateY(-10px); /* Start slightly higher */
+  }
+  to {
+    opacity: 1; /* Fully visible */
+    transform: translateY(0); /* Final position */
+  }
+}
+
+.allPosts:after {
+  content: ""; /* Creates a decorative line */
+  display: block;
+  width: 100%; /* Full width */
+  height: 4px; /* Line height */
+  background: rgba(255, 255, 255, 0.5); /* Semi-transparent white */
+  position: absolute;
+  bottom: 0; /* Positioned at the bottom */
+  left: 0; /* Align left */
+  transform: translateY(100%); /* Start below the visible area */
+  animation: slideIn 0.5s ease-in-out forwards; /* Animation for the line */
+}
+
+/* Animation for the decorative line */
+@keyframes slideIn {
+  from {
+    transform: translateY(100%); /* Start below */
+  }
+  to {
+    transform: translateY(0); /* Slide in to visible */
+  }
+}
