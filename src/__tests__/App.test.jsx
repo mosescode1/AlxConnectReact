@@ -9,10 +9,8 @@ jest.mock('../compoents/LoadingSpinner/LoadingSpinner', () => () => <div>Loading
 jest.mock('../compoents/Login/Login', () => () => <div>Login</div>);
 jest.mock('../compoents/Register/Register', () => () => <div>Register</div>);
 jest.mock('../compoents/pages/Home/Home', () => () => <div>Home</div>);
-jest.mock('../compoents/pages/addPost/addPost', () => () => <div>AddPost</div>);
 jest.mock('../compoents/pages/Profile/Profile', () => () => <div>Profile</div>);
 jest.mock('../compoents/pages/search/UserSearch', () => () => <div>UserSearch</div>);
-jest.mock('../compoents/pages/UserProfile/UserProfile', () => () => <div>UserProfile</div>);
 
 describe('App Component', () => {
     beforeEach(() => {
@@ -71,5 +69,42 @@ describe('App Component', () => {
         });
 
         expect(screen.getByText(/home/i)).toBeInTheDocument(); // Check if Home component is rendered
+    });
+
+    it('navigates to the register page', async () => {
+        await act(async () => {
+            render(
+                <MemoryRouter initialEntries={['/register']}>
+                    <App />
+                </MemoryRouter>
+            );
+        });
+
+        expect(screen.getByText(/register/i)).toBeInTheDocument(); // Check if Register component is rendered
+    });
+
+
+    it('navigates to the profile page', async () => {
+        await act(async () => {
+            render(
+                <MemoryRouter initialEntries={['/profile']}>
+                    <App />
+                </MemoryRouter>
+            );
+        });
+
+        expect(screen.getByText(/profile/i)).toBeInTheDocument(); // Check if Profile component is rendered
+    });
+
+    it('navigates to the user search page', async () => {
+        await act(async () => {
+            render(
+                <MemoryRouter initialEntries={['/search']}>
+                    <App />
+                </MemoryRouter>
+            );
+        });
+
+        expect(screen.getByText(/usersearch/i)).toBeInTheDocument(); // Check if UserSearch component is rendered
     });
 });
