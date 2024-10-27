@@ -1,3 +1,4 @@
+import React from "react";
 import styles from "./App.module.css";
 import { Route, Routes } from "react-router-dom";
 import { useEffect, useState, Fragment, Suspense, lazy } from "react";

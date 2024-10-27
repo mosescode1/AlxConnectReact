@@ -1,3 +1,4 @@
+import React from "react";
 import styles from "./Footer.module.css";
 import HomeIcon from "@mui/icons-material/Home";
 import SearchIcon from "@mui/icons-material/Search";
